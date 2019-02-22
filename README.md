@@ -18,7 +18,7 @@ pip install --upgrade pip
 pip install --upgrade setuptools wheel
 ```
 
-# How to public the package to pypi.org
+# How to public the package to pypi.org (username/password see lastpass Pypi)
 ```sh
 python setup.py sdist bdist_wheel
 python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
