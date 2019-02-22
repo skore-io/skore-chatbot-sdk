@@ -14,5 +14,12 @@ class ContentServices( BaseServices ):
     flow = options['flow'] if 'flow' in options else 1
     items = options['items'] if 'items' in options else 1
     grouped = options['grouped'] if 'grouped' in options else 'false'
-    url = CHEF_API_URL.format(host=self.host, recipe_id=recipe_id, flow=flow, items=items, grouped=grouped)
+
+    url = CHEF_API_URL.format(
+      host=self.host,
+      recipe_id=recipe_id,
+      flow=flow,
+      items=items,
+      grouped=grouped
+    )
     return self.get(url)
