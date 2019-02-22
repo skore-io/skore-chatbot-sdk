@@ -1,9 +1,13 @@
+import sentry_sdk
 from skore.base_services import BaseServices
+from sentry_sdk import capture_message
 
 CHEF_API_URL = "{host}/chef/v1/chef/{recipe_id}?amountItemsByFlow={items}&amountFlows={flow}&grouped={grouped}"
 
 class ContentServices( BaseServices ):
   def __init__(self, host, app_token, user):
+    sentry_sdk.init("https://d8a8d0686b2c4da8b906eac1f1ecf5af@sentry.io/1400364")
+    capture_message('Something went wrong')
     super( ContentServices, self ).__init__(host, app_token, user)
 
   def recommendation(self, recipe_id, options = {'flow': 1, 'items':1, 'grouped': 'false'}):

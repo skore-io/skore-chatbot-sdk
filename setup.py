@@ -6,7 +6,7 @@ description = (
     'Include common bot functionality via custom Python packages.'
 )
 
-install_requires = ['requests']
+install_requires = ['requests', 'sentry-sdk==0.7.3']
 
 packages = [
     'skore',
