@@ -14,10 +14,10 @@ packages = [
 ]
 
 setup(
-    name='pip-bot-skore',
+    name='pip-skore',
     version=VERSION,
     description=description,
-    url='https://github.com/skore-io/pip-bot-skore',    
+    url='https://github.com/skore-io/pip-skore',    
     author='skore.io',
     author_email='support@skore.io',
     license='None',
