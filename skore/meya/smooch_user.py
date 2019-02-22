@@ -15,6 +15,6 @@ class SmoochUser( User ):
     super( SmoochUser, self ).update_credentials(token, token_refresh)
     self.meya_user.set('token', token)
     self.meya_user.set('token_refresh', token_refresh)
-    # Keep compatibility with legacy 
+    # Included to keep compatibility with legacy
     self.meya_user.set('jwt_token', token)
     self.meya_user.set('refresh_token', token_refresh)

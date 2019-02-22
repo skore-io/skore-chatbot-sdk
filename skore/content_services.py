@@ -1,6 +1,5 @@
 from skore.base_services import BaseServices
 
-WORKSPACE_API_URL = "{host}/workspace/v1/contents/{content_id}/provision"
 CHEF_API_URL = "{host}/chef/v1/chef/{recipe_id}?amountItemsByFlow={items}&amountFlows={flow}&grouped={grouped}"
 
 class ContentServices( BaseServices ):
