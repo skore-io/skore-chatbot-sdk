@@ -11,6 +11,15 @@ class BaseServices( object ):
     if self.user.token == None or self.user.token_refresh == None:
       self.__create_session()
 
+  def patch(self, url, data = {}):
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': self.user.token
+    }
+    response = requests.patch(url=url, json=data, headers=headers)
+    if response.status_code != 200: return response.raise_for_status()
+    return response
+
   def get(self, url):
     response = requests.get(
       url=url,
