@@ -1,0 +1,7 @@
+venv/
+.idea/
+*.py[cod]
+.DS_Store
+build/
+dist/
+skore_chatbot_sdk.egg-info/
