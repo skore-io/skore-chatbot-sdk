@@ -6,7 +6,7 @@ description = (
     'Include common chatbot functionality.'
 )
 
-install_requires = ['requests', 'sentry-sdk==0.7.3']
+install_requires = ['requests']
 
 packages = [
     'skore',

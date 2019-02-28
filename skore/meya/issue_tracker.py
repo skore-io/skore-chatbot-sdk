@@ -25,9 +25,7 @@ def catchable(original_function):
             # )
             # status_code = service.send_meya_error(error_object, _header(this))
             # this.log(status_code, type='misc', status='info')
-
-        return this.respond(message=None, action=ACTION_FAILURE)
-
+            return this.respond(message=None, action=ACTION_FAILURE)
     return wrapped
 
 def _header(meya):
