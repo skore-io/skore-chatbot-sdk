@@ -10,5 +10,5 @@ class IntegrationServices:
 
   def send_meya_error(self, data, headers):
     url = MEYA_ERROR.format(host=self.host)
-    response = requests.post(__url(), json=data, headers=headers())
+    response = requests.post(__url(), json=data, headers=headers)
     return response.status_code

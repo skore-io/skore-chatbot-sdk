@@ -33,8 +33,12 @@ def _header(meya):
     secret_key = meya.db.bot.settings['integrations_secret_key']
     bot_name = meya.db.bot.settings['bot_name']
 
-    return {'App-Name': bot_name, 'Environment': environment,
-               'Integrations-Secret-Key': secret_key}
+    return {
+        'Content-Type': 'application/json',
+        'App-Name': bot_name,
+        'Environment': environment,
+        'Integrations-Secret-Key': secret_key
+    }
 
 def _error_object(meya, exception, line):
     user = meya.db.user
