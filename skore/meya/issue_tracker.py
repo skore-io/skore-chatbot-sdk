@@ -13,17 +13,18 @@ def catchable(original_function):
             return original_function(*args, **kwargs)
         except Exception as exception:
             this = args[0]
+            this.log('enter catchable', type='misc', status='info')
 
-            exc_type, exc_obj, exc_tb = sys.exc_info()
-            line = traceback.extract_tb(exc_tb)[-1][1]
-            error_object = _error_object(this, exception, line)
+            # exc_type, exc_obj, exc_tb = sys.exc_info()
+            # line = traceback.extract_tb(exc_tb)[-1][1]
+            # error_object = _error_object(this, exception, line)
 
-            service = IntegrationServices(
-                this.db.bot.settings['skore_host'],
-                this.db.bot.settings['environment']
-            )
-            status_code = service.send_meya_error(error_object, _header(this))
-            this.log(status_code, type='misc', status='info')        
+            # service = IntegrationServices(
+            #     this.db.bot.settings['skore_host'],
+            #     this.db.bot.settings['environment']
+            # )
+            # status_code = service.send_meya_error(error_object, _header(this))
+            # this.log(status_code, type='misc', status='info')        
         return this.respond(message=None, action=ACTION_FAILURE)
 
     return wrapped
