@@ -22,23 +22,23 @@ def catchable(original_function):
                 this.db.bot.settings['skore_host'],
                 this.db.bot.settings['environment']
             )
-            status_code = service.send_meya_error(error_object, __header())
+            status_code = service.send_meya_error(error_object, _header(this))
             this.log(status_code, type='misc', status='info')        
         return this.respond(message=None, action=ACTION_FAILURE)
 
     return wrapped
 
-def __header():
-    environment = this.db.bot.settings['environment']
-    secret_key = this.db.bot.settings['integrations_secret_key']
-    bot_name = this.db.bot.settings['bot_name']
+def _header(meya):
+    environment = meya.db.bot.settings['environment']
+    secret_key = meya.db.bot.settings['integrations_secret_key']
+    bot_name = meya.db.bot.settings['bot_name']
 
     return {'App-Name': bot_name, 'Environment': environment,
                'Integrations-Secret-Key': secret_key}
 
-def _error_object(this, exception, line):
-    user = this.db.user
-    environment = this.db.bot.settings['environment']
+def _error_object(meya, exception, line):
+    user = meya.db.user
+    environment = meya.db.bot.settings['environment']
 
     return {
         'environment': environment,
@@ -46,7 +46,7 @@ def _error_object(this, exception, line):
         'exception': {
             'name': exception.__class__.__name__,
             'message': exception.message,
-            'component_name': this.__class__.__name__,
+            'component_name': meya.__class__.__name__,
             'line': line,
             'occurred_at': _datetime_now()
         },
