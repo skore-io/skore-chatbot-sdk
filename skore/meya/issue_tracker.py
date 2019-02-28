@@ -29,8 +29,7 @@ def catchable(original_function):
             except Exception as exception:
                 this.log(exception.message, type='misc', status='info')
 
-            this.log('end service', type='misc', status='info')
-            # this.log(status_code, type='misc', status='info')
+            this.log('send_meya_error - status_code:%s' % status_code, type='misc', status='info')
 
             return this.respond(message=None, action=ACTION_FAILURE)
     return wrapped

@@ -1,6 +1,6 @@
 import requests
 
-MEYA_ERROR = "{host}/integration/v1/meya/erros"
+MEYA_ERROR = "{host}/integration/v1/meya/errors"
 
 class IntegrationServices:
   def __init__(self, host, enviroment = 'staging'):
