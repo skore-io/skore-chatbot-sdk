@@ -1,6 +1,5 @@
 import requests
 
-HOST = "https://knowledge{enviroment}.skore.io"
 MEYA_ERROR = "{host}/integration/v1/meya/erros"
 
 class IntegrationServices:
@@ -10,5 +9,5 @@ class IntegrationServices:
 
   def send_meya_error(self, data, headers):
     url = MEYA_ERROR.format(host=self.host)
-    response = requests.post(__url(), json=data, headers=headers)
+    response = requests.post(url, json=data, headers=headers)
     return response.status_code
