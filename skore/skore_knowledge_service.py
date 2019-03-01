@@ -1,6 +1,7 @@
 import requests
 
 CURRENT_USER_URL = "{host}/workspace/v1/users/current"
+PREFERENCES_USER_URL = "{host}/workspace/v1/users/preferences"
 
 class SkoreKnowledgeService( object ):
   def __init__(self, host):
@@ -12,3 +13,11 @@ class SkoreKnowledgeService( object ):
       url=url,
       headers={ 'Authorization': token }
     )
+
+  def update_user_preferences(self, token, data):
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token
+    }
+    url = PREFERENCES_USER_URL.format(host=self.host)
+    return requests.patch(url=url, json=data, headers=headers)
