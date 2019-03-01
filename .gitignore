@@ -5,3 +5,4 @@ venv/
 build/
 dist/
 skore_chatbot_sdk.egg-info/
+.vscode
