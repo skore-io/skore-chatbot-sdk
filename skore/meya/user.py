@@ -1,6 +1,4 @@
-from abc import ABC, abstractmethod
-
-class User(ABC):
+class User(object):
   def __init__(self, id):
     self.id = id
     self.jwt_token = None
@@ -16,8 +14,7 @@ class User(ABC):
     self.refresh_token = None
     if sync: self.__sync()
 
-  @abstractmethod
-  def set_skore_user_id(self, skore_user_id):
+  def set_skore_user_id(self, skore_user_id, sync = True):
     pass
 
   def update_credentials(self, token, token_refresh, sync = True):
@@ -37,14 +34,23 @@ class User(ABC):
           super( SmoochUser, self ).__init__(id)
           self.skore_user_id = skore_user_id
 
+        def __repr__(self):
+          return 'SmoochUser(id=%s, skore_user_id=%s)' % (self.id, self.skore_user_id)
+
+        def set_skore_user_id(self, skore_user_id, sync):
+          pass
+
     class MeyaUser( User ):
         def __init__(self, id, skore_user_id = None):
           super(MeyaUser, self).__init__(id)
           self.skore_user_id = skore_user_id
 
-        def set_skore_user_id(self, skore_user_id):
+        def __repr__(self):
+          return 'MeyaUser(id=%s, skore_user_id=%s)' % (self.id, self.skore_user_id)
+
+        def set_skore_user_id(self, skore_user_id, sync):
           self.skore_user_id = skore_user_id
-          self.meya_user.set('skore_user_id', skore_user_id)
+          if sync: self.meya_user.set('skore_user_id', skore_user_id)
 
     user = None
     try:
@@ -52,9 +58,12 @@ class User(ABC):
       if integrations != None and 'smooch' in integrations:
         user = SmoochUser(meya_user.get('id'), integrations['smooch']['user_id'])
       else:
-        user = MeyaUser(meya_user.get('id'), meya_user.get('skore_user_id'))
+        if 'skore_user_id' in meya_user:
+          user = MeyaUser(meya_user.get('id'), meya_user.get('skore_user_id'))
+        else:
+          user = MeyaUser(meya_user.get('id'))
     except KeyError:
-        return user
+      return None
 
     user.jwt_token = meya_user.get('jwt_token')
     user.refresh_token = meya_user.get('refresh_token')
