@@ -33,7 +33,7 @@ class User( object ):
 
 
     class MeyaUser( User ):
-        def __init__(self, id, skore_user_id):
+        def __init__(self, id):
           super( MeyaUser, self ).__init__(id)
 
     user = None
@@ -42,15 +42,12 @@ class User( object ):
       if integrations != None and 'smooch' in integrations:
         user = SmoochUser(meya_user.get('id'), integrations['smooch']['user_id'])
       else:
-        user = MeyaUser(meya_user.get('id'), meya_user.get('skore_user_id'))
+        user = MeyaUser(meya_user.get('id'))
     except KeyError:
         return user
-    # user.skore_company_id = meya_user.get('skore_company_id')
+
     user.jwt_token = meya_user.get('jwt_token')
     user.refresh_token = meya_user.get('refresh_token')
-    # user.name = meya_user.get('name')
-    # user.email = meya_user.get('email')
-
     user.meya_user = meya_user
 
     return user
