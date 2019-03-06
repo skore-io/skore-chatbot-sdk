@@ -2,7 +2,7 @@ import requests
 
 MEYA_ERROR = "{host}/integration/v1/meya/errors"
 
-class IntegrationServices:
+class IntegrationService:
   def __init__(self, host, enviroment = 'staging'):
     self.enviroment = enviroment
     self.host = host

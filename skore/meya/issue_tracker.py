@@ -2,7 +2,7 @@ from functools import wraps
 import sys
 import traceback
 import time, datetime
-from skore.integration_services import IntegrationServices
+from skore.integration_service import IntegrationService
 
 ACTION_FAILURE = 'failure'
 
@@ -19,7 +19,7 @@ def catchable(original_function):
             line = traceback.extract_tb(exc_tb)[-1][1]
             error_object = _error_object(this, exception, line)
             this.log('init service', type='misc', status='info')
-            service = IntegrationServices(
+            service = IntegrationService(
                 this.db.bot.settings['skore_host'],
                 this.db.bot.settings['environment']
             )
