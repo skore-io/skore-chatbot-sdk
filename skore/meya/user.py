@@ -38,8 +38,9 @@ class User( object ):
 
 
     class MeyaUser( User ):
-        def __init__(self, id):
-          super( MeyaUser, self ).__init__(id)
+        def __init__(self, id, skore_user_id = None):
+          super(MeyaUser, self).__init__(id)
+          self.skore_user_id = skore_user_id
 
     user = None
     try:
@@ -47,7 +48,7 @@ class User( object ):
       if integrations != None and 'smooch' in integrations:
         user = SmoochUser(meya_user.get('id'), integrations['smooch']['user_id'])
       else:
-        user = MeyaUser(meya_user.get('id'))
+        user = MeyaUser(meya_user.get('id'), meya_user.get('skore_user_id'))
     except KeyError:
         return user
 
