@@ -1,4 +1,6 @@
-class User( object ):
+from abc import ABC, abstractmethod
+
+class User(ABC):
   def __init__(self, id):
     self.id = id
     self.jwt_token = None
@@ -14,10 +16,9 @@ class User( object ):
     self.refresh_token = None
     if sync: self.__sync()
 
-  def set_skore_user_id(self, skore_user_id, sync=True):
-    self.skore_user_id = skore_user_id
-    if sync:
-      self.meya_user.set('skore_user_id', skore_user_id)
+  @abstractmethod
+  def set_skore_user_id(self, skore_user_id):
+    pass
 
   def update_credentials(self, token, token_refresh, sync = True):
     self.jwt_token = token
@@ -36,11 +37,14 @@ class User( object ):
           super( SmoochUser, self ).__init__(id)
           self.skore_user_id = skore_user_id
 
-
     class MeyaUser( User ):
         def __init__(self, id, skore_user_id = None):
           super(MeyaUser, self).__init__(id)
           self.skore_user_id = skore_user_id
+
+        def set_skore_user_id(self, skore_user_id):
+          self.skore_user_id = skore_user_id
+          self.meya_user.set('skore_user_id', skore_user_id)
 
     user = None
     try:
