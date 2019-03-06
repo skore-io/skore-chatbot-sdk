@@ -1,12 +1,12 @@
 from setuptools import setup
 
-VERSION = '0.0.2'
+VERSION = '0.0.3'
 
 description = (
     'Include common chatbot functionality.'
 )
 
-install_requires = ['requests']
+install_requires = ['requests', 'meya']
 
 packages = [
     'skore',
@@ -17,7 +17,7 @@ setup(
     name='skore-chatbot-sdk',
     version=VERSION,
     description=description,
-    url='https://github.com/skore-io/skore-chatbot-sdk',    
+    url='https://github.com/skore-io/skore-chatbot-sdk',
     author='skore.io',
     author_email='support@skore.io',
     license='None',
