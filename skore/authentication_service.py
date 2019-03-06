@@ -18,13 +18,10 @@ class AuthenticationService:
         headers = {
             'Content-Type': 'application/json'
         }
-        response = requests.post(
+        return requests.post(
             url=LOGIN_URL.format(url=self.host),
             json=data,
             headers=headers)
-        if response.status_code != 200: return response.raise_for_status()
-
-        return response.json()
 
     def refresh_token(self, token, token_refresh):
         url = REFRESH_API_URL.format(host=self.host)
