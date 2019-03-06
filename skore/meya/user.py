@@ -14,6 +14,11 @@ class User( object ):
     self.refresh_token = None
     if sync: self.__sync()
 
+  def set_skore_user_id(self, skore_user_id, sync=True):
+    self.skore_user_id = skore_user_id
+    if sync:
+      self.meya_user.set('skore_user_id', skore_user_id)
+
   def update_credentials(self, token, token_refresh, sync = True):
     self.jwt_token = token
     self.refresh_token = token_refresh
