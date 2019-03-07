@@ -6,7 +6,7 @@ class User(object):
     self.skore_user_id = None
     self.meya_user = None
 
-  def signed_in(self):
+  def is_signed_in(self):
       return self.jwt_token != None and self.refresh_token != None and self.skore_user_id != None
 
   def clean_up_credentials(self, sync = True):
