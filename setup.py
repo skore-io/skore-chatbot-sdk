@@ -1,6 +1,6 @@
 from setuptools import setup
 
-VERSION = '0.0.1'
+VERSION = '0.0.3'
 
 description = (
     'Include common chatbot functionality.'
@@ -17,7 +17,7 @@ setup(
     name='skore-chatbot-sdk',
     version=VERSION,
     description=description,
-    url='https://github.com/skore-io/skore-chatbot-sdk',    
+    url='https://github.com/skore-io/skore-chatbot-sdk',
     author='skore.io',
     author_email='support@skore.io',
     license='None',
