@@ -2,9 +2,10 @@ from functools import wraps
 import sys
 import traceback
 import time, datetime
-from skore.integration_service import IntegrationService
+import requests
 
 ACTION_FAILURE = 'failure'
+MEYA_ERROR = "{host}/integration/v1/meya/errors"
 
 def catchable(original_function):
     @wraps(original_function)
@@ -13,19 +14,13 @@ def catchable(original_function):
             return original_function(*args, **kwargs)
         except Exception as exception:
             this = args[0]
-            this.log('enter catchable', type='misc', status='info')
 
             exc_type, exc_obj, exc_tb = sys.exc_info()
             line = traceback.extract_tb(exc_tb)[-1][1]
             error_object = _error_object(this, exception, line)
-            this.log('init service', type='misc', status='info')
-            service = IntegrationService(
-                this.db.bot.settings['skore_host'],
-                this.db.bot.settings['environment']
-            )
-            this.log('start service', type='misc', status='info')
+            host = this.db.bot.settings['skore_host']
             try:
-                status_code = service.send_meya_error(error_object, _header(this))
+                status_code = _send_meya_error(host, _header(this), error_object)
             except Exception as exception:
                 this.log(exception.message, type='misc', status='info')
 
@@ -74,3 +69,9 @@ def _datetime_now():
     time_format = '%Y-%m-%d %H:%M:%S'
 
     return datetime.datetime.fromtimestamp(timestamp).strftime(time_format)
+
+
+def _send_meya_error(host, headers, data):
+    url = MEYA_ERROR.format(host=host)
+    response = requests.post(url, json=data, headers=headers)
+    return response.status_code
