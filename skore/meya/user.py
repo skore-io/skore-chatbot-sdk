@@ -37,7 +37,7 @@ class User(object):
         def __repr__(self):
           return 'SmoochUser(id=%s, skore_user_id=%s)' % (self.id, self.skore_user_id)
 
-        def set_skore_user_id(self, skore_user_id, sync):
+        def set_skore_user_id(self, skore_user_id, sync = True):
           pass
 
     class MeyaUser( User ):
@@ -48,7 +48,7 @@ class User(object):
         def __repr__(self):
           return 'MeyaUser(id=%s, skore_user_id=%s)' % (self.id, self.skore_user_id)
 
-        def set_skore_user_id(self, skore_user_id, sync):
+        def set_skore_user_id(self, skore_user_id, sync = True):
           self.skore_user_id = skore_user_id
           if sync: self.meya_user.set('skore_user_id', skore_user_id)
 
