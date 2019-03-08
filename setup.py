@@ -1,16 +1,12 @@
 from setuptools import setup
 
-<<<<<<< HEAD
-VERSION = '0.0.3'
-=======
 VERSION = '0.0.5'
->>>>>>> develop
 
 description = (
     'Include common chatbot functionality.'
 )
 
-install_requires = ['requests', 'meya']
+install_requires = ['requests']
 
 packages = [
     'skore',
