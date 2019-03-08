@@ -58,8 +58,9 @@ class User(object):
       if integrations != None and 'smooch' in integrations:
         user = SmoochUser(meya_user.get('id'), integrations['smooch']['user_id'])
       else:
-        if 'skore_user_id' in meya_user:
-          user = MeyaUser(meya_user.get('id'), meya_user.get('skore_user_id'))
+        skore_user_id = meya_user.get('skore_user_id')
+        if skore_user_id != None:
+          user = MeyaUser(meya_user.get('id'), skore_user_id)
         else:
           user = MeyaUser(meya_user.get('id'))
     except KeyError:
