@@ -3,6 +3,7 @@ import requests
 CURRENT_USER_URL = "{host}/workspace/v1/users/current"
 PREFERENCES_USER_URL = "{host}/workspace/v1/users/preferences"
 CONTENT_PROVISION_URL = "{host}/workspace/{version}/contents/{content_id}/provision"
+CONTENT_SEARCH_URL = "{host}/workspace/{version}/search"
 
 class SkoreKnowledgeService( object ):
   def __init__(self, host):
@@ -31,3 +32,18 @@ class SkoreKnowledgeService( object ):
     }
     url = PREFERENCES_USER_URL.format(host=self.host)
     return requests.patch(url=url, json=data, headers=headers)
+
+  def search_content(self, token, query, version = "v1", limit = 3):
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token
+    }
+    url = CONTENT_SEARCH_URL.format(
+        host=self.host,
+        version=version
+    )
+    params = {
+      "q": query,
+      "limit": limit
+    }
+    return requests.get(url = url, params = params, headers = headers)
