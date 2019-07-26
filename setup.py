@@ -1,9 +1,9 @@
 from setuptools import setup
 
-VERSION = '0.0.6'
+VERSION = '0.0.7'
 
 description = (
-    'Include common chatbot functionality.'
+    'Include search functionality.'
 )
 
 install_requires = ['requests']
